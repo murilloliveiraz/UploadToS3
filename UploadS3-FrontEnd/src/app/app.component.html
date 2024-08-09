@@ -1,0 +1,17 @@
+<div>
+  <h1>Upload de Arquivo no Bucket do S3</h1>
+  <form [formGroup]="bucketForm" (submit)="enviar()">
+    <div class="row">
+      <div class="group-row">
+        <input type="file" name="file" id="file" placeholder="Arquivo" formControlName="file" required />
+        <label class="error-input" *ngIf="bucketForm.get('file')?.errors?.['required'] && bucketForm.get('file')?.touched">
+            Campo Obrigatório!
+        </label>
+      </div>
+      <div class="group-row">
+        <input type="text" name="prefix" id="prefix" placeholder="Prefixo (opcional)" formControlName="prefix" />
+      </div>
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
