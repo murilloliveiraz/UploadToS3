@@ -9,6 +9,8 @@ import { FilesService } from '../services/files.service';
 })
 export class AppComponent {
   title = 'UploadS3-FrontEnd';
+  selectedFile: File;
+  fileErrors: boolean = false;
 
   bucketForm: FormGroup;
   constructor(
@@ -18,9 +20,15 @@ export class AppComponent {
 
   ngOnInit() {
     this.bucketForm = this.formBuilder.group({
-      file: ['', [Validators.required]],
-      prefix: [''], // Adicionando prefix opcional ao form
+      prefix: [''],
     });
+  }
+
+  onFileSelected(event: Event){
+    const fileInput = event.target as HTMLInputElement;
+    if(fileInput.files && fileInput.files.length > 0){
+      this.selectedFile = fileInput.files[0];
+    }
   }
 
   dadosForm() {
@@ -29,15 +37,16 @@ export class AppComponent {
 
   enviar() {
     const dados = this.dadosForm();
-    const file = dados['file'].value;
     const bucket = 'murilloxz-bucket';
     const prefix = dados['prefix'].value;
-
-    if (file) {
-      this.filesService.UploadFileAsync(file, bucket, prefix).subscribe({
+    debugger
+    if (this.selectedFile) {
+      this.filesService.UploadFileAsync(this.selectedFile, bucket, prefix).subscribe({
         next: (response) => console.log('Upload successful!', response),
         error: (error) => console.error('Upload failed!', error),
       });
+    } else {
+      this.fileErrors = true;
     }
   }
 }

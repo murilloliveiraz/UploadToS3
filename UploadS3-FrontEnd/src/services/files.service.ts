@@ -12,13 +12,13 @@ export class FilesService {
   private readonly baseURL = environment["endPoint"];
 
   UploadFileAsync(file: File, bucketName: string, prefix?: string) {
-    const formData: FormData = new FormData();
+    const formData = new FormData();
     formData.append('file', file);
     formData.append('bucketName', bucketName);
     if (prefix) {
       formData.append('prefix', prefix);
     }
-    return this.httpClient.post<any>(`${this.baseURL}/UploadFileAsync`, formData);
-  }
 
+    return this.httpClient.post<any>(`${this.baseURL}/Files`, formData);
+  }
 }

@@ -3,8 +3,8 @@
   <form [formGroup]="bucketForm" (submit)="enviar()">
     <div class="row">
       <div class="group-row">
-        <input type="file" name="file" id="file" placeholder="Arquivo" formControlName="file" required />
-        <label class="error-input" *ngIf="bucketForm.get('file')?.errors?.['required'] && bucketForm.get('file')?.touched">
+        <input type="file" name="file" id="file" (change)="onFileSelected($event)" placeholder="Arquivo" required />
+        <label class="error-input" *ngIf="fileErrors">
             Campo Obrigatório!
         </label>
       </div>
