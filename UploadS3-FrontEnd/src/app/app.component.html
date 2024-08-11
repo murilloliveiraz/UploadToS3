@@ -1,6 +1,6 @@
 <div>
   <h1>Upload de Arquivo no Bucket do S3</h1>
-  <form [formGroup]="bucketForm" (submit)="enviar()">
+  <form [formGroup]="bucketForm" (submit)="uploadFile()">
     <div class="row">
       <div class="group-row">
         <input type="file" name="file" id="file" (change)="onFileSelected($event)" placeholder="Arquivo" required />
@@ -14,4 +14,27 @@
     </div>
     <button type="submit">Enviar</button>
   </form>
+</div>
+
+<div class="container-list-user">
+  <table cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <td>Nome</td>
+        <td>Ação</td>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="select-item" *ngFor="let item of filesAtS3; let i = index"
+      class="linha-table" [ngClass]="{'linha-cinza' : i % 2 == 0, 'linha-branca' : i % 2 !== 0}">
+      <td>{{item.name}}</td>
+
+      <td>
+        <a [href]="item.presignedUrl" target="_blank">View</a>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
 </div>

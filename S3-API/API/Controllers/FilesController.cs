@@ -18,7 +18,7 @@ namespace API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UploadFileAsync(IFormFile file, string bucketName, string? prefix)
+        public async Task<IActionResult> UploadFileAsync(IFormFile file, [FromForm] string bucketName, [FromForm] string? prefix)
         {
             var bucketExists = await Amazon.S3.Util.AmazonS3Util.DoesS3BucketExistV2Async(_s3Client, bucketName);
             if (!bucketExists) return NotFound($"Bucket {bucketName} does not exist.");
@@ -30,7 +30,8 @@ namespace API.Controllers
             };
             request.Metadata.Add("Content-Type", file.ContentType);
             await _s3Client.PutObjectAsync(request);
-            return Ok($"File {prefix}/{file.FileName} uploaded to S3 successfully!");
+            return Ok(new { Message = $"File {prefix}/{file.FileName} uploaded to S3 successfully!" });
+
         }
 
         [HttpGet]

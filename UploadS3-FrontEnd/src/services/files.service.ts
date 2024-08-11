@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environment';
+import { Observable } from 'rxjs';
+import { IFileItem } from '../models/IFileItem';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,9 @@ export class FilesService {
     }
 
     return this.httpClient.post<any>(`${this.baseURL}/Files`, formData);
+  }
+
+  GetAllFilesAsync(bucketName: string) : Observable<IFileItem[]>{
+    return this.httpClient.get<IFileItem[]>(`${this.baseURL}/Files?bucketName=${bucketName}`);
   }
 }

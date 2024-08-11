@@ -1,0 +1,50 @@
+
+.container-list-user
+{
+    margin-top: 50px;
+}
+
+table {
+  width: 100%;
+
+  thead {
+    background: #e6e6e6;
+    color: #636363;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    height: 60px;
+
+    td {
+      padding: 0px 0px 8px 16px;
+    }
+  }
+
+  tbody {
+    td {
+      padding: 0px 0 0 16px;
+      color: #000;
+      font-family: sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      cursor: pointer;
+    }
+  }
+}
+
+.linha-table {
+  border-radius: 8px 8px 0px 0px;
+  height: 56px;
+}
+
+.linha-branca {
+  border-radius: 8px 8px 0px 0px;
+  background: #fff;
+}
+
+.linha-cinza {
+  background: #f9f7f7;
+}
